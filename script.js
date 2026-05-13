@@ -35,15 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof particlesJS !== 'undefined') {
       particlesJS('particles-js', {
         particles: {
-          number: { value: 40, density: { enable: true, value_area: 900 } },
+          number: { value: 100, density: { enable: true, value_area: 800 } },
           color: { value: '#6c5ce7' },
           shape: { type: 'circle' },
-          opacity: { value: 0.25, random: true },
-          size: { value: 2.5, random: true },
+          opacity: { value: 0.6, random: true },
+          size: { value: 3.5, random: true },
           line_linked: {
-            enable: true, distance: 140, color: '#6c5ce7', opacity: 0.08, width: 1
+            enable: true, distance: 150, color: '#6c5ce7', opacity: 0.3, width: 1.2
           },
-          move: { enable: true, speed: 0.8, direction: 'none', random: true, out_mode: 'out' }
+          move: { enable: true, speed: 1, direction: 'none', random: true, out_mode: 'out' }
         },
         interactivity: {
           detect_on: 'canvas',
@@ -131,6 +131,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.addEventListener('scroll', updateNav);
   updateNav();
+
+  // ══ MOUSE PARALLAX FOR BACKGROUND SHAPES ══
+  const shapes = document.querySelectorAll('.float-shape');
+  document.addEventListener('mousemove', (e) => {
+    const { clientX, clientY } = e;
+    const x = (clientX - window.innerWidth / 2) / 25;
+    const y = (clientY - window.innerHeight / 2) / 25;
+    
+    shapes.forEach((shape, index) => {
+      const depth = (index + 1) * 0.8;
+      shape.style.transform = `translate3d(${x * depth}px, ${y * depth}px, 0)`;
+    });
+  });
 
   // ══ MOBILE MENU ══
   const menuToggle = document.getElementById('menuToggle');
